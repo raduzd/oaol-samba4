@@ -1,0 +1,5 @@
+---
+- hosts: samba-dc
+  remote_user: root
+  roles:
+    - compile

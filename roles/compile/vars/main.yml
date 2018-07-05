@@ -1,0 +1,5 @@
+---
+# vars file for compile
+samba_src_download_url: https://download.samba.org/pub/samba/samba-latest.tar.gz
+compile_workdir: "{{ ansible_user_dir }}/samba-compile"
+

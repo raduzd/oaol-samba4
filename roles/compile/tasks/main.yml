@@ -1,0 +1,41 @@
+---
+# tasks file for compile
+
+- name: Load distro specific vars
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+
+- name: Clean-up workdir
+  block:
+    - name: Remove workdir
+      file:
+        state: absent
+        path: "{{ compile_workdir }}"
+    - name: Create workdir
+      file:
+        state: directory
+        path: "{{ compile_workdir }}"
+
+- name: Download and uncompress Samba source
+  unarchive:
+#    src: "{{ samba_src_download_url }}"
+    src: samba-latest.tar.gz
+    dest:  "{{ compile_workdir}}"
+#    remote_src: yes
+
+- name: Find samba src directory
+  find:
+    paths: "{{ compile_workdir}}"
+    file_type: directory
+    patterns: "samba-4*"
+  register: found_files
+
+- name: Create samba source var
+  set_fact:
+    samba_src: "{{ found_files.files[0].path }}"
+
+- name: Install required packages
+  package:
+    state: latest
+    name: "{{ required_packages }}"
