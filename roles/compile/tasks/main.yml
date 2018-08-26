@@ -26,7 +26,7 @@
 
 - name: Find samba src directory
   find:
-    paths: "{{ compile_workdir}}"
+    paths: "{{ compile_workdir }}"
     file_type: directory
     patterns: "samba-4*"
   register: found_files
@@ -39,3 +39,12 @@
   package:
     state: latest
     name: "{{ required_packages }}"
+
+- name: Run configure
+  shell: "./configure --sbindir={{ sbin_path }} --sysconfdir={{ etc_path }}"
+  args:
+    chdir: "{{ samba_src }}"
+
+- name: Run make
+  make:
+    chdir: "{{ samba_src }}"

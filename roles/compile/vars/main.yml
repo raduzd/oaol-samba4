@@ -3,3 +3,6 @@
 samba_src_download_url: https://download.samba.org/pub/samba/samba-latest.tar.gz
 compile_workdir: "{{ ansible_user_dir }}/samba-compile"
 
+# Re-define if you want to change installation dir
+sbin_path: /usr/local/samba/sbin
+etc_path: /usr/local/samba/etc/

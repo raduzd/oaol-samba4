@@ -1,0 +1,15 @@
+---
+# tasks file for install
+
+- name: Install samba
+  make:
+    # samba_src variable is set by the compile role. If running without compile role, set the variable manually by
+    # passing the -e "samba_src=/path/to/src" to the ansible-playbook command.
+    chdir: "{{ samba_src }}"
+    target: install
+  become: yes
+
+- name: Modify root's PATH variable
+  lineinfile:
+    path: /root/.bashrc
+    line: "export PATH=/usr/local/samba/bin/:{{ sbin_path }}:$PATH"
