@@ -2,4 +2,7 @@
 - hosts: samba-dc
   remote_user: root
   roles:
-    - compile
+#    - compile
+#    - install
+    - bind_backend
+    - init_ad_domain

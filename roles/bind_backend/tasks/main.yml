@@ -1,0 +1,18 @@
+---
+# tasks file for bind_backend
+
+- name: Load distro specific vars
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+
+- name: Install BIND
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ bind_packages }}"
+
+- name: Start BIND
+  service:
+    name: "{{ bind_service }}"
+    state: started

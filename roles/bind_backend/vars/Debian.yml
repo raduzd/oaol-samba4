@@ -1,0 +1,6 @@
+bind_packages:
+  - bind9
+  - bind9utils
+  - dnsutils
+
+bind_service: bind9

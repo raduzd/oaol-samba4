@@ -1,0 +1,25 @@
+---
+# tasks file for init_ad_domain
+
+- name: Include AD admin password
+  include_vars: adpass.yml
+
+- name: Run AD DC provisioning
+  command: "{{ ad_provision_command }}"
+
+- name: Include Samba config in /etc/bind/named.conf
+  lineinfile:
+    path: /etc/bind/named.conf
+    line: include "/usr/local/samba/bind-dns/named.conf";
+  when: dns_backend == "BIND9_DLZ"
+
+- name: Enable DNS resolver
+  template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+
+- name: Copy krb5.conf
+  copy:
+    src: /usr/local/samba/private/krb5.conf
+    dest: /etc/krb5.conf
+    remote_src: yes

@@ -1,0 +1,8 @@
+---
+# vars file for init_ad_domain
+netbios_domain_name: SKOLA
+dns_backend: BIND9_DLZ
+bind_version: 9.10
+#dns_backend: SAMBA_INTERNAL
+realm: skola.oaol.cz
+ad_provision_command: "samba-tool domain provision --server-role=dc --use-rfc2307 --dns-backend={{ dns_backend }} --realm={{ realm|upper }} --domain={{ netbios_domain_name }} --admin={{ ad_admin_password }}"
