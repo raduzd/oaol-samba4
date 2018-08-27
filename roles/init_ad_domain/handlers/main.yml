@@ -1,2 +1,6 @@
 ---
 # handlers file for init_ad_domain
+- name: restart_bind
+  service:
+    name: bind9
+    state: restarted

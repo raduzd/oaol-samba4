@@ -12,6 +12,7 @@
     path: /etc/bind/named.conf
     line: include "/usr/local/samba/bind-dns/named.conf";
   when: dns_backend == "BIND9_DLZ"
+  notify: restart_bind
 
 - name: Enable DNS resolver
   template:
