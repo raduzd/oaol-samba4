@@ -9,7 +9,15 @@
     target: install
   become: yes
 
+- name: Configure system's /etc/hosts file
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*{{ ansible_fqdn}}'
+    line: "{{ansible_default_ipv4.address}} {{ansible_hostname}} {{ansible_fqdn}}"
+    state: present
+
 - name: Modify root's PATH variable
   lineinfile:
     path: /root/.bashrc
     line: "export PATH=/usr/local/samba/bin/:{{ sbin_path }}:$PATH"
+    state: present

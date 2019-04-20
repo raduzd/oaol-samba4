@@ -19,10 +19,9 @@
 
 - name: Download and uncompress Samba source
   unarchive:
-#    src: "{{ samba_src_download_url }}"
-    src: samba-latest.tar.gz
+    src: "{{ samba_src_download_url }}"
     dest:  "{{ compile_workdir}}"
-#    remote_src: yes
+    remote_src: yes
 
 - name: Find samba src directory
   find:
