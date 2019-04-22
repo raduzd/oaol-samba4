@@ -6,3 +6,4 @@
     - install
     - bind_backend
     - init_ad_domain
+    - timesync

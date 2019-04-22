@@ -1,0 +1,28 @@
+---
+# tasks file for timesync
+
+- name: Install ntp server
+  yum:
+    name: ntp
+    state: present
+
+- name: Set ntp_signd attributtes
+  file:
+    group: ntp
+    owner: root
+    mode: 750
+    path: /usr/local/samba/var/lib/ntp_signd/
+
+- name: Install ntp config file
+  copy:
+    src: files/ntp.conf
+    dest: /etc/ntp.conf
+    backup: yes
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+
+- name: Restart ntpd service
+  service:
+    name: ntp
+    state: restarted
