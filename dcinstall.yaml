@@ -6,5 +6,6 @@
     - install
     - bind_backend
     - init_ad_domain
+    - resolver_config    
     - systemd-unit
     - timesync

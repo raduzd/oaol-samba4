@@ -14,11 +14,6 @@
   when: dns_backend == "BIND9_DLZ"
   notify: restart_bind
 
-- name: Enable DNS resolver
-  template:
-    src: resolv.conf.j2
-    dest: /etc/resolv.conf
-
 - name: Copy krb5.conf
   copy:
     src: /usr/local/samba/private/krb5.conf
