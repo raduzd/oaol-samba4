@@ -1,0 +1,22 @@
+---
+# tasks file for systemd-unit
+
+- name: Install systemd unit file
+  copy: 
+    src: "{{ unit_file }}.service"
+    dest: /etc/systemd/system/
+    
+- name: Reload systemd config
+  systemd:
+    daemon_reload: yes
+    
+- name: Start samba (to create /usr/local/samba/var/lib/ntp_signd/)
+  service:
+    name: "{{ unit_file }}"
+    state: started
+    
+- name: Stop samba
+  service:
+    name: "{{ unit_file }}"
+    state: stopped
+    
