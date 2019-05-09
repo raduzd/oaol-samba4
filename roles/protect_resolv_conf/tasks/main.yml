@@ -1,0 +1,14 @@
+---
+# tasks file for protect_resolv_conf
+
+- name: Create dhclient enter hook to leave resolv.conf alone
+  lineinfile:
+    create: yes
+    path: /etc/dhcp/dhclient-enter-hooks.d/leave_my_resolv_conf_alone
+    line: "make_resolv_conf() { :; }"
+
+- name: Set execute flags
+  file:
+    path: /etc/dhcp/dhclient-enter-hooks.d/leave_my_resolv_conf_alone
+    mode: 755
+    

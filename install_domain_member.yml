@@ -1,0 +1,11 @@
+---
+- hosts: samba-members
+  remote_user: root
+  roles:
+    - compile
+    - install
+    - add_host_to_hosts_file    
+    - resolver_config    
+    - protect_resolv_conf
+    - create_krb_config
+    

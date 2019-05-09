@@ -10,7 +10,7 @@
   file:
     group: ntp
     owner: root
-    mode: 750
+    mode: 0750
     path: /usr/local/samba/var/lib/ntp_signd/
 
 - name: Install ntp config file

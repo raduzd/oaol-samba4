@@ -1,0 +1,8 @@
+---
+# tasks file for add_host_to_hosts_file
+
+- name: Add local FQDN to the /etc/hosts file
+  lineinfile:
+    regexp: "^{{ ansible_default_ipv4.address }}"
+    line: "{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_hostname }}.{{ realm }}"
+    path: /etc/hosts 

@@ -1,0 +1,18 @@
+[global]
+security = ADS
+workgroup = {{ netbios_domain_name}}
+realm = {{ realm }}
+
+log file = /var/log/samba/%m.log
+log level = 1
+
+# Default ID mapping configuration for local BUILTIN accounts
+# and groups on a domain member. The default (*) domain:
+# - must not overlap with any domain ID mapping configuration!
+# - must use a read-write-enabled back end, such as tdb.
+idmap config * : backend = {{ id_db_backend }}
+idmap config * : range = {{ asterisk_range }}
+# - You must set a DOMAIN backend configuration
+# idmap config for the {{ realm }} domain
+idmap config {{ realm }} : backend = {{ id_backend }}
+idmap config {{ realm }} : range = {{ id_range }}
