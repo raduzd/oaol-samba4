@@ -1,7 +1,8 @@
 ---
-- hosts: samba-dc
+- hosts: samba_dc
   remote_user: root
   roles:
+    - import_admin_password
     - compile
     - install
     - add_host_to_hosts_file

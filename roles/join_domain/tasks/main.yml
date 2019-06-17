@@ -1,0 +1,15 @@
+---
+# tasks file for join_domain
+
+- name: Join member to domain
+  command: "net ads join -U administrator%{{ ad_admin_password }}"
+
+- name: Configure nsswitch.conf 
+  lineinfile:
+    state: present
+    path: /etc/nsswitch.conf
+    regexp: "^{{ item }}:\\s*compat"
+    line: "{{ item }}: compat winbind"
+  with_items:
+    - group
+    - passwd

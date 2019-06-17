@@ -1,9 +1,6 @@
 ---
 # tasks file for init_ad_domain
 
-- name: Include AD admin password
-  include_vars: adpass.yml
-
 - name: Run AD DC provisioning
   command: "{{ ad_provision_command }}"
 
@@ -19,3 +16,19 @@
     src: /usr/local/samba/private/krb5.conf
     dest: /etc/krb5.conf
     remote_src: yes
+    
+- name: Setup dynamic DNS update using Kerberos
+  lineinfile:
+    path: /etc/bind/named.conf.options
+    insertafter: 'options {'
+    firstmatch: yes
+    line: 'tkey-gssapi-keytab "/usr/local/samba/private/dns.keytab";'
+    backup: yes
+
+- name: Configure dynamic DNS update - fix private dir
+  file: 
+    path: /usr/local/samba/private
+    group: bind
+    mode: '750'
+   
+        

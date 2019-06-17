@@ -13,6 +13,13 @@ log level = 1
 idmap config * : backend = {{ id_db_backend }}
 idmap config * : range = {{ asterisk_range }}
 # - You must set a DOMAIN backend configuration
-# idmap config for the {{ realm }} domain
-idmap config {{ realm }} : backend = {{ id_backend }}
-idmap config {{ realm }} : range = {{ id_range }}
+# idmap config for the {{ netbios_domain_name }} domain
+idmap config {{ netbios_domain_name }} : backend = {{ id_backend }}
+idmap config {{ netbios_domain_name }} : range = {{ id_range }}
+
+template shell = /bin/bash
+template homedir = /home/%U
+
+vfs objects = acl_xattr
+map acl inherit = yes
+store dos attributes = yes

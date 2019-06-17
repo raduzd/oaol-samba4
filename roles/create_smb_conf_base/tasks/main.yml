@@ -1,2 +1,6 @@
 ---
 # tasks file for create_smb_conf_base
+- name: Install smb.conf file
+  template:
+    src: smb.conf.j2
+    dest: /usr/local/samba/etc/smb.conf

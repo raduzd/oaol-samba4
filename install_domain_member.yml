@@ -1,11 +1,13 @@
 ---
-- hosts: samba-members
+- hosts: samba_members
   remote_user: root
   roles:
+    - import_admin_password
     - compile
     - install
     - add_host_to_hosts_file    
     - resolver_config    
     - protect_resolv_conf
     - create_krb_config
-    
+    - create_smb_conf_base
+    - join_domain

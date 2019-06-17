@@ -1,0 +1,5 @@
+---
+# tasks file for import_admin_password
+
+- name: Include AD admin password
+  include_vars: adpass.yml
