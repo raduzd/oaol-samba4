@@ -1,0 +1,12 @@
+[Unit]
+Description=Samba nmbd daemon
+After=network.target remote-fs.target nss-lookup.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/samba/sbin/nmbd -D
+PIDFile=/usr/local/samba/var/run/nmbd.pid
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

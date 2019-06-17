@@ -3,8 +3,9 @@
 
 - name: Install systemd unit file
   copy: 
-    src: "{{ unit_file }}.service"
+    src: "{{ item }}.service"
     dest: /etc/systemd/system/
+  loop: "{{ unit_files }}"
     
 - name: Reload systemd config
   systemd:
@@ -12,11 +13,15 @@
     
 - name: Start samba (to create /usr/local/samba/var/lib/ntp_signd/)
   service:
-    name: "{{ unit_file }}"
+    name: "{{ item }}"
     state: started
-    
+  loop: "{{ unit_files }}"
+   
 - name: Stop samba
   service:
-    name: "{{ unit_file }}"
+    name: "{{ item }}"
     state: stopped
+  loop: "{{ unit_files }}"
+
+  
     

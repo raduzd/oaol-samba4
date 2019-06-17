@@ -1,11 +1,11 @@
 [Unit]
-Description=Samba smbd daemon
+Description=Samba winbind daemon
 After=network.target remote-fs.target nss-lookup.target
 
 [Service]
 Type=forking
-ExecStart=/usr/local/samba/sbin/smbd -D
-PIDFile=/usr/local/samba/var/run/smbd.pid
+ExecStart=/usr/local/samba/sbin/winbindd -D
+PIDFile=/usr/local/samba/var/run/winbindd.pid
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]

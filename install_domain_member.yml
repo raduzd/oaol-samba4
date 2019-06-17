@@ -11,3 +11,4 @@
     - create_krb_config
     - create_smb_conf_base
     - join_domain
+    - systemd-unit
